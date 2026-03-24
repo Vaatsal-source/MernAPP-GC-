@@ -22,7 +22,7 @@ if (envResult.error) {
   process.exit(1); 
 }
 
-// --- RATINGS ROUTES ---
+
 app.get('/api/ratings/:gameId', async (req, res) => {
   try {
     const ratings = await Rating.find({ gameId: req.params.gameId });
@@ -43,7 +43,7 @@ app.post('/api/ratings', auth, async (req, res) => {
   }
 });
 
-// --- COMMENTS ROUTES ---
+
 app.get('/api/comments/:gameId', async (req, res) => {
   try {
     const comments = await Comment.find({ gameId: req.params.gameId }).sort({ createdAt: -1 });
@@ -51,12 +51,12 @@ app.get('/api/comments/:gameId', async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// Combined Post/Update Route
+
 app.post('/api/comments', auth, async (req, res) => {
   const { id, text, gameId, userName, userPhoto } = req.body;
   try {
     if (id) {
-      // Edit Mode
+      
       const comment = await Comment.findById(id);
       if (!comment) return res.status(404).json({ error: "Not found" });
       if (comment.userId !== req.user.id) return res.status(401).json({ error: "Unauthorized" });
@@ -64,7 +64,7 @@ app.post('/api/comments', auth, async (req, res) => {
       const updated = await Comment.findByIdAndUpdate(id, { text, editedAt: Date.now() }, { new: true });
       return res.json(updated);
     }
-    // New Post Mode
+    
     const newComment = new Comment({ gameId, text, userName, userPhoto, userId: req.user.id });
     await newComment.save();
     res.status(201).json(newComment);
@@ -82,7 +82,7 @@ app.delete('/api/comments/:id', auth, async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// --- AUTH ROUTES ---
+
 app.post('/api/auth/google-login', async (req, res) => {
   const { googleId, email, displayName, photoURL } = req.body;
   try {
