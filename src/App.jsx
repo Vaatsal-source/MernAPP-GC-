@@ -170,7 +170,7 @@ const GameDetailView = ({ game, onBack, user }) => {
         userPhoto: user.photoURL
       };
 
-      // If editingId is set, the backend logic will treat this as an update
+      
       if (editingId) payload.id = editingId;
 
       const res = await fetch(`${API_URL}/comments`, {
