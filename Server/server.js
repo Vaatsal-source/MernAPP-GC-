@@ -101,7 +101,7 @@ app.post('/api/auth/google-login', async (req, res) => {
 });
 app.use(express.static(path.join(__dirname, 'dist')));
 app.get('/:any*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
 app.listen(5000, () => console.log("Server running on port 5000"));
