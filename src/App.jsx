@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./index.css";
 import { gamesData } from "./gamesData";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://mernapp-gc-6.onrender.com/api/auth/google-login/api";
 
 const StarRating = ({ rating, onRate }) => (
   <div className="star-rating">
