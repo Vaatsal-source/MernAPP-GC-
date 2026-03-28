@@ -83,7 +83,7 @@ app.delete('/api/comments/:id', auth, async (req, res) => {
 });
 
 
-app.post('https://mernapp-gc-6.onrender.com/api/auth/google-login', async (req, res) => {
+app.post('/api/auth/google-login', async (req, res) => {
   const { googleId, email, displayName, photoURL } = req.body;
   try {
     let user = await User.findOne({ googleId });
