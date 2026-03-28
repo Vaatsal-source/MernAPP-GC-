@@ -98,9 +98,9 @@ app.post('https://mernapp-gc-6.onrender.com/api/auth/google-login', async (req, 
     res.status(500).json({ success: false, error: error.message });
   }
 });
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use(express.static(path.join(__dirname, '/dist')));
 app.use((req, res) => {
-    res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+    res.sendFile(path.join(__dirname, '/dist', 'index.html'));
 });
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log("Server running on port 5000"));
