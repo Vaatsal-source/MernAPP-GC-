@@ -19,9 +19,8 @@ const __dirname = path.resolve();
 mongoose.connect(process.env.MONGODB_URI);
 const envResult = dotenv.config();
 
-if (envResult.error) {
-  console.error("CRITICAL: dotenv could not find or read your .env file!", envResult.error);
-  process.exit(1); 
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
 }
 
 
