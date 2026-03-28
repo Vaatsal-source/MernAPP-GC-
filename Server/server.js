@@ -21,7 +21,7 @@ app.use(express.json());
 const __dirname = path.resolve();
 
 mongoose.connect(process.env.MONGODB_URI);
-
+const envResult = dotenv.config();
 
 app.get('/api/ratings/:gameId', async (req, res) => {
   try {
