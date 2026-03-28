@@ -8,12 +8,15 @@ import Rating from './Rating.js';
 import Comment from './Comment.js';
 import User from './User.js';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
 
 const JWT_SECRET = process.env.JWT_SEC;
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.resolve();
 
 mongoose.connect(process.env.MONGODB_URI);
@@ -99,7 +102,7 @@ app.post('/api/auth/google-login', async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, '../dist')));
 app.get('/:any*', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
