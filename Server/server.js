@@ -7,12 +7,14 @@ import cors from 'cors';
 import Rating from './Rating.js'; 
 import Comment from './Comment.js';
 import User from './User.js';
+import path from 'path';
 
 const JWT_SECRET = process.env.JWT_SEC;
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+const __dirname = path.resolve();
 
 mongoose.connect(process.env.MONGODB_URI);
 const envResult = dotenv.config();
@@ -97,6 +99,10 @@ app.post('/api/auth/google-login', async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
+});
+app.use(express.static(path.join(__dirname, 'dist')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(5000, () => console.log("Server running on port 5000"));
